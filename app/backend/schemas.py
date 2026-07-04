@@ -134,6 +134,9 @@ class TokenResponse(BaseModel):
 class UploadResponse(BaseModel):
     key: str
     url: str
+    width: int | None = None
+    height: int | None = None
+    photography_tips: list[str] = []
 
 
 class DashboardMetrics(BaseModel):

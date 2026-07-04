@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import type { Card } from '../api';
 import { formatPrice } from '../api';
+import { SlabViewer } from './SlabFrame';
 
 interface Props {
   card: Card | null;
@@ -16,7 +17,7 @@ export function CardModal({ card, onClose, onBuy }: Props) {
     <AnimatePresence>
       <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
         <motion.div
-          className="modal"
+          className="modal modal--slab"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
@@ -27,8 +28,15 @@ export function CardModal({ card, onClose, onBuy }: Props) {
             <button className="modal-close" onClick={onClose} aria-label="Close">×</button>
           </div>
           <div className="modal-body">
-            <img src={card.image_url} alt={card.player_name} />
-            <p><strong>{card.year} {card.set_name}</strong> — {card.grader} {card.grade} ({card.condition})</p>
+            <SlabViewer
+              src={card.image_url}
+              alt={card.player_name}
+              grader={card.grader}
+              grade={card.grade}
+              playerName={card.player_name}
+              year={card.year}
+              setName={card.set_name}
+            />
             <p>{card.description}</p>
             <p className="card-price">{formatPrice(card.price)}</p>
             <button className="btn-primary" style={{ width: '100%' }} disabled={card.status !== 'available'} onClick={() => onBuy(card)}>

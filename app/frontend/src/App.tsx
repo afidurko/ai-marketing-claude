@@ -5,6 +5,7 @@ import { CardTile } from './components/CardTile';
 import { CardModal, PurchaseModal } from './components/Modals';
 import { CeoDashboard } from './components/CeoDashboard';
 import { TeamPanel } from './components/TeamPanel';
+import { HeroSlab } from './components/SlabFrame';
 
 type Tab = 'shop' | 'inventory' | 'about' | 'team' | 'ceo';
 
@@ -86,6 +87,11 @@ export default function App() {
     return { demo: result.demo_mode, message: result.message };
   };
 
+  const featuredCard =
+    cards.find((c) => c.rarity === 'Legendary' && c.status === 'available') ||
+    cards.find((c) => c.status === 'available') ||
+    cards[0];
+
   const tabs: { id: Tab; label: string }[] = [
     { id: 'shop', label: 'Shop' },
     { id: 'inventory', label: 'Full Inventory' },
@@ -131,7 +137,7 @@ export default function App() {
         >
           {tab === 'shop' && (
             <>
-              <section className="hero">
+              <section className="hero hero--split">
                 <div className="hero-content">
                   <h2>Own a Piece of Baseball History</h2>
                   <p>
@@ -155,6 +161,14 @@ export default function App() {
                     </div>
                   )}
                 </div>
+                {featuredCard && (
+                  <HeroSlab
+                    src={featuredCard.image_url}
+                    alt={featuredCard.player_name}
+                    grader={featuredCard.grader}
+                    grade={featuredCard.grade}
+                  />
+                )}
               </section>
 
               <div className="filters-bar">
@@ -236,7 +250,12 @@ export default function App() {
                 <li>Insured shipping with tamper-evident slab packaging</li>
                 <li>30-day authenticity guarantee on every acquisition</li>
                 <li>White-glove consignment for estate collections</li>
+                <li>Museum-style slab presentation — holographic case effects, cert labels, click-to-inspect zoom</li>
               </ul>
+              <p style={{ marginTop: '1.5rem', fontSize: '0.9rem', color: 'var(--leather-light)' }}>
+                Every card is photographed to our slab standards (1200×1680 minimum, cert readable, glare-free).
+                See <code>app/team/SLAB-PHOTOGRAPHY-GUIDE.md</code> for the full spec.
+              </p>
             </section>
           )}
 

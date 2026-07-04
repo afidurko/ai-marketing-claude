@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Trash2, Upload, Plus, Pencil } from 'lucide-react';
 import { api, type Card, formatPrice, resolveImageUrl } from '../api';
+import { SlabFrame } from './SlabFrame';
 
 const EMPTY: Partial<Card> = {
   player_name: '',
@@ -30,6 +31,7 @@ export function AdminInventory({ token, onChanged }: Props) {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [photoTips, setPhotoTips] = useState<string[]>([]);
 
   const load = async () => {
     setLoading(true);
@@ -50,8 +52,9 @@ export function AdminInventory({ token, onChanged }: Props) {
     setUploading(true);
     setError('');
     try {
-      const { key, url } = await api.uploadImage(token, file);
-      setForm((f) => ({ ...f, image_url: resolveImageUrl(url), image_key: key }));
+      const result = await api.uploadImage(token, file);
+      setForm((f) => ({ ...f, image_url: resolveImageUrl(result.url), image_key: result.key }));
+      setPhotoTips(result.photography_tips || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Upload failed');
     } finally {
@@ -182,6 +185,27 @@ export function AdminInventory({ token, onChanged }: Props) {
             required
           />
         </div>
+        {form.image_url && (
+          <div className="photo-preview-wrap">
+            <SlabFrame
+              src={form.image_url}
+              alt="Preview"
+              grader={form.grader || 'PSA'}
+              grade={form.grade || '8'}
+              size="sm"
+              interactive
+            />
+          </div>
+        )}
+        {photoTips.length > 0 && (
+          <ul className="photo-tips">
+            {photoTips.map((tip) => (
+              <li key={tip} className={tip.includes('low') || tip.includes('Crop') ? 'warn' : ''}>
+                {tip}
+              </li>
+            ))}
+          </ul>
+        )}
         <div className="form-group">
           <label>Description</label>
           <textarea

@@ -148,7 +148,13 @@ export const api = {
       body: form,
     });
     if (!res.ok) throw new Error(await res.text());
-    return res.json() as Promise<{ key: string; url: string }>;
+    return res.json() as Promise<{
+      key: string;
+      url: string;
+      width?: number;
+      height?: number;
+      photography_tips?: string[];
+    }>;
   },
 };
 
