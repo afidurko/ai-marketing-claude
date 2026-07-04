@@ -22,6 +22,7 @@ def public_track(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     event = AnalyticsEvent(
         event_type=payload.event_type,
         metadata_json=json.dumps(payload.metadata),
+        session_id=payload.session_id,
     )
     db.add(event)
     db.commit()

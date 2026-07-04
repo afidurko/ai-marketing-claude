@@ -30,8 +30,11 @@ class Card(Base):
     grader: Mapped[str] = mapped_column(String(40), default="PSA")
     condition: Mapped[str] = mapped_column(String(80), default="Near Mint")
     price: Mapped[float] = mapped_column(Float)
-    status: Mapped[CardStatus] = mapped_column(Enum(CardStatus), default=CardStatus.AVAILABLE, index=True)
+    status: Mapped[CardStatus] = mapped_column(
+        Enum(CardStatus, native_enum=False), default=CardStatus.AVAILABLE, index=True
+    )
     image_url: Mapped[str] = mapped_column(String(500))
+    image_key: Mapped[str | None] = mapped_column(String(300), nullable=True)
     description: Mapped[str] = mapped_column(Text, default="")
     rarity: Mapped[str] = mapped_column(String(40), default="Common")
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
@@ -47,7 +50,11 @@ class Order(Base):
     customer_email: Mapped[str] = mapped_column(String(200))
     customer_name: Mapped[str] = mapped_column(String(200))
     total: Mapped[float] = mapped_column(Float, default=0)
-    status: Mapped[OrderStatus] = mapped_column(Enum(OrderStatus), default=OrderStatus.PENDING)
+    status: Mapped[OrderStatus] = mapped_column(
+        Enum(OrderStatus, native_enum=False), default=OrderStatus.PENDING
+    )
+    stripe_session_id: Mapped[str | None] = mapped_column(String(200), nullable=True, index=True)
+    payment_method: Mapped[str] = mapped_column(String(40), default="demo")
     created_at: Mapped[datetime] = mapped_column(DateTime, server_default=func.now())
 
     items: Mapped[list["OrderItem"]] = relationship(back_populates="order", cascade="all, delete-orphan")
@@ -71,4 +78,5 @@ class AnalyticsEvent(Base):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     event_type: Mapped[str] = mapped_column(String(80), index=True)
     metadata_json: Mapped[str] = mapped_column(Text, default="{}")
+    session_id: Mapped[str | None] = mapped_column(String(64), nullable=True, index=True)
     timestamp: Mapped[datetime] = mapped_column(DateTime, server_default=func.now(), index=True)

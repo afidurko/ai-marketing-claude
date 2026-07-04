@@ -17,6 +17,8 @@ export default function App() {
   const [grade, setGrade] = useState('');
   const [viewCard, setViewCard] = useState<Card | null>(null);
   const [buyCard, setBuyCard] = useState<Card | null>(null);
+  const [stripeEnabled, setStripeEnabled] = useState(false);
+  const [toast, setToast] = useState('');
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -40,6 +42,25 @@ export default function App() {
   }, [search, year, grade, tab]);
 
   useEffect(() => {
+    api.getPaymentConfig().then((c) => setStripeEnabled(c.stripe_enabled)).catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const checkout = params.get('checkout');
+    const orderId = params.get('order_id');
+    if (checkout === 'success') {
+      setToast('Payment successful! Your card is on its way.');
+      window.history.replaceState({}, '', window.location.pathname);
+    } else if (checkout === 'cancelled' && orderId) {
+      api.cancelCheckout(Number(orderId)).catch(() => {});
+      setToast('Checkout cancelled. Card returned to inventory.');
+      window.history.replaceState({}, '', window.location.pathname);
+      loadData();
+    }
+  }, [loadData]);
+
+  useEffect(() => {
     api.track('page_view', { page: tab });
   }, [tab]);
 
@@ -49,10 +70,19 @@ export default function App() {
   }, [loadData]);
 
   const handlePurchase = async (email: string, name: string) => {
-    if (!buyCard) return;
-    await api.createOrder({ customer_email: email, customer_name: name, card_ids: [buyCard.id] });
+    if (!buyCard) return {};
+    const result = await api.checkout({
+      customer_email: email,
+      customer_name: name,
+      card_ids: [buyCard.id],
+    });
+    if (result.checkout_url) {
+      window.location.href = result.checkout_url;
+      return {};
+    }
     setBuyCard(null);
     await loadData();
+    return { demo: result.demo_mode, message: result.message };
   };
 
   const tabs: { id: Tab; label: string }[] = [
@@ -208,12 +238,21 @@ export default function App() {
             </section>
           )}
 
-          {tab === 'ceo' && <CeoDashboard />}
+          {tab === 'ceo' && <CeoDashboard onInventoryChange={loadData} />}
         </motion.main>
       </AnimatePresence>
 
+      {toast && (
+        <div className="toast" onClick={() => setToast('')}>{toast}</div>
+      )}
+
       <CardModal card={viewCard} onClose={() => setViewCard(null)} onBuy={setBuyCard} />
-      <PurchaseModal card={buyCard} onClose={() => setBuyCard(null)} onSubmit={handlePurchase} />
+      <PurchaseModal
+        card={buyCard}
+        stripeEnabled={stripeEnabled}
+        onClose={() => setBuyCard(null)}
+        onSubmit={handlePurchase}
+      />
     </div>
   );
 }

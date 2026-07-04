@@ -21,7 +21,7 @@ class CardBase(BaseModel):
 
 
 class CardCreate(CardBase):
-    pass
+    image_key: str | None = None
 
 
 class CardUpdate(BaseModel):
@@ -34,6 +34,7 @@ class CardUpdate(BaseModel):
     price: float | None = Field(default=None, gt=0)
     status: CardStatus | None = None
     image_url: str | None = None
+    image_key: str | None = None
     description: str | None = None
     rarity: str | None = None
 
@@ -42,6 +43,7 @@ class CardOut(CardBase):
     model_config = ConfigDict(from_attributes=True)
 
     id: int
+    image_key: str | None = None
     created_at: datetime
     updated_at: datetime
 
@@ -54,6 +56,20 @@ class OrderCreate(BaseModel):
     customer_email: EmailStr
     customer_name: str
     card_ids: list[int]
+
+
+class CheckoutRequest(BaseModel):
+    customer_email: EmailStr
+    customer_name: str
+    card_ids: list[int]
+    session_id: str | None = None
+
+
+class CheckoutResponse(BaseModel):
+    order_id: int
+    checkout_url: str | None = None
+    demo_mode: bool = False
+    message: str | None = None
 
 
 class OrderItemOut(BaseModel):
@@ -73,6 +89,8 @@ class OrderOut(BaseModel):
     customer_name: str
     total: float
     status: OrderStatus
+    stripe_session_id: str | None = None
+    payment_method: str
     created_at: datetime
     items: list[OrderItemOut] = []
 
@@ -90,6 +108,7 @@ class InventoryStats(BaseModel):
 class AnalyticsEventCreate(BaseModel):
     event_type: str
     metadata: dict[str, Any] = {}
+    session_id: str | None = None
 
 
 class AnalyticsEventOut(BaseModel):
@@ -98,6 +117,7 @@ class AnalyticsEventOut(BaseModel):
     id: int
     event_type: str
     metadata_json: str
+    session_id: str | None = None
     timestamp: datetime
 
 
@@ -111,6 +131,11 @@ class TokenResponse(BaseModel):
     token_type: str = "bearer"
 
 
+class UploadResponse(BaseModel):
+    key: str
+    url: str
+
+
 class DashboardMetrics(BaseModel):
     total_revenue: float
     orders_count: int
@@ -122,3 +147,9 @@ class DashboardMetrics(BaseModel):
     daily_views: list[dict[str, Any]]
     search_trends: list[dict[str, Any]]
     recent_events: list[AnalyticsEventOut]
+
+
+class AdvancedAnalytics(BaseModel):
+    funnel: list[dict[str, Any]]
+    cohorts: list[dict[str, Any]]
+    revenue_forecast: dict[str, Any]

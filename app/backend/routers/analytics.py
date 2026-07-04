@@ -7,8 +7,9 @@ from sqlalchemy.orm import Session
 
 from routers.auth import get_current_admin
 from database import get_db
-from models import AnalyticsEvent, Card, CardStatus, Order, OrderItem
-from schemas import AnalyticsEventCreate, AnalyticsEventOut, DashboardMetrics
+from models import AnalyticsEvent, Card, CardStatus, Order, OrderStatus
+from schemas import AdvancedAnalytics, AnalyticsEventCreate, AnalyticsEventOut, DashboardMetrics
+from services.analytics_advanced import compute_cohorts, compute_funnel, compute_revenue_forecast
 
 router = APIRouter(prefix="/api/analytics", tags=["analytics"])
 
@@ -18,6 +19,7 @@ def track_event(payload: AnalyticsEventCreate, db: Session = Depends(get_db)):
     event = AnalyticsEvent(
         event_type=payload.event_type,
         metadata_json=json.dumps(payload.metadata),
+        session_id=payload.session_id,
     )
     db.add(event)
     db.commit()
@@ -30,9 +32,18 @@ def list_events(limit: int = 50, db: Session = Depends(get_db), _: str = Depends
     return db.query(AnalyticsEvent).order_by(AnalyticsEvent.timestamp.desc()).limit(limit).all()
 
 
+@router.get("/advanced", response_model=AdvancedAnalytics)
+def advanced_analytics(db: Session = Depends(get_db), _: str = Depends(get_current_admin)):
+    return AdvancedAnalytics(
+        funnel=compute_funnel(db),
+        cohorts=compute_cohorts(db),
+        revenue_forecast=compute_revenue_forecast(db),
+    )
+
+
 @router.get("/dashboard", response_model=DashboardMetrics)
 def ceo_dashboard(db: Session = Depends(get_db), _: str = Depends(get_current_admin)):
-    orders = db.query(Order).all()
+    orders = db.query(Order).filter(Order.status == OrderStatus.COMPLETED).all()
     total_revenue = sum(o.total for o in orders)
     orders_count = len(orders)
     avg_order_value = total_revenue / orders_count if orders_count else 0

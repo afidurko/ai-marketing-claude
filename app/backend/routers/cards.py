@@ -7,7 +7,8 @@ from sqlalchemy.orm import Session
 
 from database import get_db
 from models import AnalyticsEvent, Card, CardStatus
-from schemas import AnalyticsEventCreate, AnalyticsEventOut, CardCreate, CardOut, CardUpdate, InventoryStats
+from routers.auth import get_current_admin
+from schemas import CardCreate, CardOut, CardUpdate, InventoryStats
 
 router = APIRouter(prefix="/api/cards", tags=["cards"])
 
@@ -99,7 +100,7 @@ def get_card(card_id: int, db: Session = Depends(get_db)):
 
 
 @router.post("", response_model=CardOut, status_code=201)
-def create_card(payload: CardCreate, db: Session = Depends(get_db)):
+def create_card(payload: CardCreate, db: Session = Depends(get_db), _: str = Depends(get_current_admin)):
     card = Card(**payload.model_dump())
     db.add(card)
     db.commit()
@@ -108,7 +109,7 @@ def create_card(payload: CardCreate, db: Session = Depends(get_db)):
 
 
 @router.patch("/{card_id}", response_model=CardOut)
-def update_card(card_id: int, payload: CardUpdate, db: Session = Depends(get_db)):
+def update_card(card_id: int, payload: CardUpdate, db: Session = Depends(get_db), _: str = Depends(get_current_admin)):
     card = db.get(Card, card_id)
     if not card:
         raise HTTPException(status_code=404, detail="Card not found")
@@ -120,7 +121,7 @@ def update_card(card_id: int, payload: CardUpdate, db: Session = Depends(get_db)
 
 
 @router.delete("/{card_id}", status_code=204)
-def delete_card(card_id: int, db: Session = Depends(get_db)):
+def delete_card(card_id: int, db: Session = Depends(get_db), _: str = Depends(get_current_admin)):
     card = db.get(Card, card_id)
     if not card:
         raise HTTPException(status_code=404, detail="Card not found")

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { ShoppingBag, Eye } from 'lucide-react';
 import type { Card } from '../api';
-import { formatPrice } from '../api';
+import { formatPrice, resolveImageUrl } from '../api';
 
 interface Props {
   card: Card;
@@ -19,7 +19,7 @@ export function CardTile({ card, onView, onBuy }: Props) {
       whileHover={{ scale: 1.02 }}
     >
       <div className="card-image-wrap">
-        <img src={card.image_url} alt={`${card.year} ${card.player_name}`} loading="lazy" />
+        <img src={resolveImageUrl(card.image_url)} alt={`${card.year} ${card.player_name}`} loading="lazy" />
         <span className={`rarity-badge rarity-${card.rarity}`}>{card.rarity}</span>
         <span className="status-badge">{card.status}</span>
       </div>
