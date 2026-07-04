@@ -847,3 +847,212 @@ input, select, textarea {
   color: var(--field-green);
   font-size: 0.85rem;
 }
+
+/* Team Panel */
+.team-panel {
+  max-width: 1100px;
+}
+
+.founder-card {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  background: linear-gradient(135deg, var(--leather) 0%, #2a1a0a 100%);
+  color: var(--cream);
+  padding: 1.75rem;
+  border-radius: 12px;
+  border: 3px solid var(--gold);
+  margin-bottom: 2rem;
+  box-shadow: 0 8px 32px var(--shadow);
+}
+
+.founder-badge {
+  width: 56px;
+  height: 56px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--leather);
+  flex-shrink: 0;
+}
+
+.founder-card h2 {
+  color: var(--gold-bright);
+  font-size: 1.35rem;
+  margin-bottom: 0.25rem;
+}
+
+.founder-tagline {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.75rem;
+}
+
+.founder-card p {
+  line-height: 1.7;
+  opacity: 0.92;
+}
+
+.founder-powers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.founder-powers span {
+  background: rgba(201, 162, 39, 0.2);
+  border: 1px solid var(--gold);
+  padding: 0.3rem 0.65rem;
+  border-radius: 4px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.team-heading {
+  color: var(--leather);
+  margin-bottom: 0.5rem;
+}
+
+.team-intro {
+  color: var(--leather-light);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.team-intro code {
+  background: var(--parchment);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.team-card {
+  background: var(--cream);
+  border: 2px solid var(--card-border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.team-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1rem 1.1rem;
+  border-bottom: 3px solid;
+  background: var(--parchment);
+}
+
+.team-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.team-card h3 {
+  font-size: 1rem;
+  color: var(--leather);
+  line-height: 1.2;
+}
+
+.team-role {
+  font-size: 0.75rem;
+  color: var(--leather-light);
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.team-summary {
+  padding: 0.85rem 1.1rem 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--leather-light);
+}
+
+.team-duties {
+  list-style: none;
+  padding: 0.75rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.team-duties li {
+  font-size: 0.85rem;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.team-duties li::before {
+  content: '⚾';
+  position: absolute;
+  left: 0;
+  font-size: 0.65rem;
+  top: 0.2rem;
+}
+
+.team-meta {
+  padding: 0.75rem 1.1rem 1rem;
+  border-top: 1px solid rgba(61, 41, 20, 0.12);
+  background: rgba(232, 220, 196, 0.4);
+}
+
+.team-meta code {
+  display: inline-block;
+  background: var(--leather);
+  color: var(--gold-bright);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.team-escalates {
+  font-size: 0.78rem;
+  color: var(--leather-light);
+  line-height: 1.5;
+}
+
+.team-commands .command-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.command-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--cream);
+  border-radius: 6px;
+  border-left: 3px solid var(--gold);
+}
+
+.command-item code {
+  font-size: 0.85rem;
+  color: var(--leather);
+}
+
+.command-item span {
+  font-size: 0.8rem;
+  color: var(--leather-light);
+}

@@ -84,6 +84,7 @@ Upload via CEO Portal → Manage Inventory → Upload Image.
 |---------|----------|
 | Shop with search/filters | Shop tab |
 | Full inventory ledger | Full Inventory tab |
+| Team roster & governance | Team tab |
 | Stripe / demo checkout | Acquire button → checkout modal |
 | CEO KPI dashboard | CEO Portal → Overview |
 | Funnel, cohorts, forecast | CEO Portal → Advanced Analytics |
@@ -113,6 +114,22 @@ Upload via CEO Portal → Manage Inventory → Upload Image.
 4. ✅ Admin inventory management UI
 5. ✅ Advanced analytics (funnels, cohorts, revenue forecast)
 6. ✅ Marketing launch playbook
+
+## Team (5 Specialists + You)
+
+Full roster: **`app/TEAM.md`**
+
+| Member | Role | Command |
+|--------|------|---------|
+| Victoria Mercer | Acquisitions & Authentication | `/heritage acquire` |
+| Marcus Chen | Growth & Marketing | `/heritage grow` |
+| Elena Rodriguez | Sales & Customer Experience | `/heritage sell` |
+| Priya Sharma | Brand & Content | `/heritage brand` |
+| James Okafor | Operations & Technology | `/heritage ops` |
+
+**You are Founder & CEO** — ultimate authority on acquisitions, pricing, campaigns, content, and deployments. Team orchestrator: `app/team/SKILL.md`
+
+View the team in the app: **Team tab**
 
 ## Next Steps
 

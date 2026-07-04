@@ -4,8 +4,9 @@ import { api, type Card, type InventoryStats, formatPrice } from './api';
 import { CardTile } from './components/CardTile';
 import { CardModal, PurchaseModal } from './components/Modals';
 import { CeoDashboard } from './components/CeoDashboard';
+import { TeamPanel } from './components/TeamPanel';
 
-type Tab = 'shop' | 'inventory' | 'about' | 'ceo';
+type Tab = 'shop' | 'inventory' | 'about' | 'team' | 'ceo';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('shop');
@@ -89,6 +90,7 @@ export default function App() {
     { id: 'shop', label: 'Shop' },
     { id: 'inventory', label: 'Full Inventory' },
     { id: 'about', label: 'Our Story' },
+    { id: 'team', label: 'Team' },
     { id: 'ceo', label: 'CEO Portal' },
   ];
 
@@ -237,6 +239,8 @@ export default function App() {
               </ul>
             </section>
           )}
+
+          {tab === 'team' && <TeamPanel />}
 
           {tab === 'ceo' && <CeoDashboard onInventoryChange={loadData} />}
         </motion.main>
