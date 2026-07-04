@@ -1,0 +1,130 @@
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import type { Card } from '../api';
+import { formatPrice } from '../api';
+
+interface Props {
+  card: Card | null;
+  onClose: () => void;
+  onBuy: (card: Card) => void;
+}
+
+export function CardModal({ card, onClose, onBuy }: Props) {
+  if (!card) return null;
+
+  return (
+    <AnimatePresence>
+      <motion.div
+        className="modal-overlay"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+      >
+        <motion.div
+          className="modal"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0.9, opacity: 0 }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="modal-header">
+            <h3>{card.player_name}</h3>
+            <button className="modal-close" onClick={onClose} aria-label="Close">
+              ×
+            </button>
+          </div>
+          <div className="modal-body">
+            <img src={card.image_url} alt={card.player_name} />
+            <p>
+              <strong>
+                {card.year} {card.set_name}
+              </strong>{' '}
+              — {card.grader} {card.grade} ({card.condition})
+            </p>
+            <p>{card.description}</p>
+            <p className="card-price">{formatPrice(card.price)}</p>
+            <button
+              className="btn-primary"
+              style={{ width: '100%' }}
+              disabled={card.status !== 'available'}
+              onClick={() => onBuy(card)}
+            >
+              {card.status === 'available' ? 'Add to Collection' : `Status: ${card.status}`}
+            </button>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+interface PurchaseProps {
+  card: Card | null;
+  onClose: () => void;
+  onSubmit: (email: string, name: string) => Promise<void>;
+}
+
+export function PurchaseModal({ card, onClose, onSubmit }: PurchaseProps) {
+  const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  if (!card) return null;
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    try {
+      await onSubmit(email, name);
+      onClose();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Purchase failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={onClose}>
+      <motion.div
+        className="modal"
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="modal-header">
+          <h3>Acquire Card</h3>
+          <button className="modal-close" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <form className="modal-body" onSubmit={handleSubmit}>
+          <p>
+            {card.player_name} — {formatPrice(card.price)}
+          </p>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input id="name" value={name} onChange={(e) => setName(e.target.value)} required />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p className="error-msg">{error}</p>}
+          <button className="btn-primary" type="submit" disabled={loading} style={{ width: '100%' }}>
+            {loading ? 'Processing…' : 'Complete Purchase'}
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  );
+}
