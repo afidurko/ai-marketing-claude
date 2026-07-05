@@ -41,7 +41,7 @@
 
 - [x] Landing page with vintage UI and interactive tabs
 - [x] Live inventory API with search/filters
-- [x] Stripe checkout integration (demo + production-ready)
+- [x] Stripe checkout integration (demo mode — live payments deferred)
 - [x] CEO analytics dashboard with funnel, cohorts, forecast
 - [x] Admin inventory management with photo upload (local CDN / S3-R2)
 - [x] PostgreSQL migration path via Alembic + Docker Compose
