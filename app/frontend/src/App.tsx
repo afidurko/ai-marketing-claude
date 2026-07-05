@@ -6,8 +6,9 @@ import { CardModal, PurchaseModal } from './components/Modals';
 import { CeoDashboard } from './components/CeoDashboard';
 import { TeamPanel } from './components/TeamPanel';
 import { HeroSlab } from './components/SlabFrame';
+import { WorkShowcase } from './components/WorkShowcase';
 
-type Tab = 'shop' | 'inventory' | 'about' | 'team' | 'ceo';
+type Tab = 'shop' | 'inventory' | 'about' | 'team' | 'examples' | 'ceo';
 
 export default function App() {
   const [tab, setTab] = useState<Tab>('shop');
@@ -97,6 +98,7 @@ export default function App() {
     { id: 'inventory', label: 'Full Inventory' },
     { id: 'about', label: 'Our Story' },
     { id: 'team', label: 'Team' },
+    { id: 'examples', label: 'Examples' },
     { id: 'ceo', label: 'CEO Portal' },
   ];
 
@@ -260,6 +262,8 @@ export default function App() {
           )}
 
           {tab === 'team' && <TeamPanel />}
+
+          {tab === 'examples' && <WorkShowcase />}
 
           {tab === 'ceo' && <CeoDashboard onInventoryChange={loadData} />}
         </motion.main>
