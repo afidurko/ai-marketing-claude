@@ -150,7 +150,7 @@ Monitor weekly in the **CEO Command Center**:
 ## Launch Checklist (Final 48 Hours)
 
 - [ ] All inventory photos are real slab shots (not placeholders)
-- [ ] Stripe live keys configured, test purchase completed
+- [ ] ~~Stripe live keys~~ — deferred; demo checkout active
 - [ ] PostgreSQL running in production (not SQLite)
 - [ ] S3/R2 CDN serving images
 - [ ] SSL certificate active on domain

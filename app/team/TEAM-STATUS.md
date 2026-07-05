@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Phase 1 grail photography **approved**. Victoria and Priya execute `PHASE-1-SHOOT-LIST.md`. Vault Drop follows 48h after Mantle goes live. One item still awaits your approval: Stripe go-live.
+Phase 1 grail photography **approved**. Victoria and Priya execute `PHASE-1-SHOOT-LIST.md`. Vault Drop follows 48h after Mantle goes live. **Payments deferred** — demo checkout only until Founder revisits Stripe.
 
 ---
 
@@ -20,7 +20,7 @@ Phase 1 grail photography **approved**. Victoria and Priya execute `PHASE-1-SHOO
 | Marcus Chen | Growth | Vault Drop calendar (post-Mantle live) | 🟢 Active |
 | Elena Rodriguez | Sales & CX | Mantle + Aaron copy refresh after shoot | 🟢 Active |
 | Priya Sharma | Brand & Content | **Phase 1 shoot — studio + social crops** | 🟢 Active |
-| James Okafor | Ops & Tech | Upload QA pipeline for shoot day | 🟢 Active |
+| James Okafor | Ops & Tech | Phase 1 upload QA; payments deferred (demo mode) | 🟢 Active |
 
 ---
 
@@ -38,9 +38,11 @@ Full details: `app/team/PHASE-1-SHOOT-LIST.md`
 
 ---
 
-## Needs Your Decision
+## Deferred
 
-1. **Stripe go-live** — James + Elena: test mode first vs. live immediately
+| Item | Status |
+|------|--------|
+| Stripe / live payments | ⏸ Skipped for now — demo checkout active |
 
 ---
 
@@ -50,7 +52,7 @@ Full details: `app/team/PHASE-1-SHOOT-LIST.md`
 |----------|------|---------|
 | **Phase 1 grail shoot** | Priya | Victoria, James |
 | Vault Drop (post-Mantle) | Marcus | Priya, Elena |
-| Stripe production | James | Elena |
+| ~~Stripe production~~ | — | Deferred |
 | Consignment outreach | Victoria | Marcus |
 
 ---

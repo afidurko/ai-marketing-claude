@@ -49,18 +49,17 @@ uvicorn main:app --reload
 
 Migrations run automatically on app startup. Existing SQLite databases are stamped and upgraded seamlessly.
 
-## Stripe Checkout
+## Stripe Checkout (deferred)
 
-Add to `app/backend/.env`:
+Live payments are **skipped for now**. The app uses **demo mode** — no Stripe keys required. Acquire completes instantly without redirect.
+
+When you're ready to revisit, add to `app/backend/.env`:
 
 ```
 STRIPE_SECRET_KEY=sk_test_...
 STRIPE_PUBLISHABLE_KEY=pk_test_...
 STRIPE_WEBHOOK_SECRET=whsec_...
-FRONTEND_URL=http://localhost:5173
 ```
-
-Without Stripe keys, checkout completes in **demo mode** (instant order, no redirect).
 
 Webhook endpoint: `POST /api/payments/webhook`
 
@@ -135,5 +134,5 @@ View the team in the app: **Team tab**
 
 - Replace placeholder images with real slab photography
 - Deploy to production (Railway, Fly.io, or AWS)
-- Configure live Stripe + R2 credentials
+- Configure live Stripe + R2 credentials (Stripe **deferred** — demo checkout active)
 - Run email sequences from `LAUNCH-PLAYBOOK-HERITAGE-SLABS.md`
