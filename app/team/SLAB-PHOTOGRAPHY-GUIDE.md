@@ -76,7 +76,7 @@ Even placeholder images render inside the slab treatment until real photos repla
 | Phase | Timeline | Scope |
 |-------|----------|-------|
 | **Phase 0** ✅ | Now | SlabFrame CSS, upload pipeline, photography guide |
-| **Phase 1** | Week 1–2 | Top 5 grail cards ($25K+) — studio or pro consignment photos |
+| **Phase 1** | Week 1–2 | Top 5 grail cards ($25K+) + Mantle capstone | ✅ Approved — see `PHASE-1-SHOOT-LIST.md` |
 | **Phase 2** | Week 3–4 | Remaining inventory $2K+ — lightbox batch shoot |
 | **Phase 3** | Week 5+ | Sub-$2K cards — standardized lightbox template |
 

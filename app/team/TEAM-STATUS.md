@@ -1,6 +1,6 @@
 # Heritage Slabs — Team Status
 
-**Generated:** 2026-07-04  
+**Updated:** 2026-07-05  
 **Founder:** You (ultimate authority)  
 **Team size:** 5 specialists
 
@@ -8,7 +8,7 @@
 
 ## Executive Summary
 
-Heritage Slabs has a full operating team of five AI agents, each mapped to the AI Marketing Suite skills. All five are active and aligned to the launch playbook. **Three items await your approval** (see Decision Log).
+Phase 1 grail photography **approved**. Victoria and Priya execute `PHASE-1-SHOOT-LIST.md`. Vault Drop follows 48h after Mantle goes live. One item still awaits your approval: Stripe go-live.
 
 ---
 
@@ -16,33 +16,42 @@ Heritage Slabs has a full operating team of five AI agents, each mapped to the A
 
 | Member | Role | This Week's Focus | Status |
 |--------|------|-------------------|--------|
-| Victoria Mercer | Acquisitions | Build consignment pipeline; comp pricing on grail cards | 🟢 Active |
-| Marcus Chen | Growth | Vault Drop campaign planning; SEO keyword queue | 🟢 Active |
-| Elena Rodriguez | Sales & CX | Checkout trust audit; welcome email draft | 🟢 Active |
-| Priya Sharma | Brand & Content | Slab photo standards; 7-day social calendar | 🟢 Active |
-| James Okafor | Ops & Tech | PostgreSQL path; Stripe live checklist | 🟢 Active |
+| Victoria Mercer | Acquisitions | Phase 1 cert pre-verify; shoot day sign-off | 🟢 Active |
+| Marcus Chen | Growth | Vault Drop calendar (post-Mantle live) | 🟢 Active |
+| Elena Rodriguez | Sales & CX | Mantle + Aaron copy refresh after shoot | 🟢 Active |
+| Priya Sharma | Brand & Content | **Phase 1 shoot — studio + social crops** | 🟢 Active |
+| James Okafor | Ops & Tech | Upload QA pipeline for shoot day | 🟢 Active |
 
 ---
 
-## Needs Your Decision [NEEDS APPROVAL]
+## Phase 1 Active (Founder Approved ✅)
 
-1. **Slab photography** — Priya + Victoria recommend replacing Unsplash placeholders before Vault Drop. Options: A) Studio shoot B) Consignment photos C) Phased by price tier.
-2. **Stripe go-live** — James + Elena ready for test keys; need your approval to switch from demo mode.
-3. **Vault Drop date** — Marcus proposes 2-week or 4-week launch window pending photo refresh.
+| Task | Owner | Status |
+|------|-------|--------|
+| Schedule shoot day | Priya + Victoria | Ready to schedule |
+| Cert pre-verify 6 slabs | Victoria | Pending |
+| Studio / lightbox booking | Priya | Pending |
+| Mantle capstone shot | Priya + Victoria + Founder (optional) | Pending |
+| Vault Drop launch | Marcus | 48h after Mantle photo live |
 
-Log your call in `app/team/DECISION-LOG.md`.
+Full details: `app/team/PHASE-1-SHOOT-LIST.md`
 
 ---
 
-## Cross-Team Priorities (Launch Playbook)
+## Needs Your Decision
+
+1. **Stripe go-live** — James + Elena: test mode first vs. live immediately
+
+---
+
+## Cross-Team Priorities
 
 | Priority | Lead | Support |
 |----------|------|---------|
-| Real slab photography | Priya | Victoria, James |
+| **Phase 1 grail shoot** | Priya | Victoria, James |
+| Vault Drop (post-Mantle) | Marcus | Priya, Elena |
 | Stripe production | James | Elena |
-| First email sequence | Elena | Priya, Marcus |
-| Consignment outreach (10 dealers) | Victoria | Marcus |
-| GA4 + Meta Pixel | James | Marcus |
+| Consignment outreach | Victoria | Marcus |
 
 ---
 
@@ -50,12 +59,9 @@ Log your call in `app/team/DECISION-LOG.md`.
 
 ```
 /heritage standup
-/heritage acquire consignment-strategy
+/heritage brand phase-1-shoot
+/heritage acquire mantle-cert-verify
 /heritage grow vault-drop
-/heritage sell checkout-trust
-/heritage brand social-calendar
-/heritage ops production-deploy
-/heritage decide <your question>
 ```
 
 **Remember:** The team proposes. You decide.

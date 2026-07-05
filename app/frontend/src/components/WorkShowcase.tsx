@@ -70,6 +70,22 @@ export function WorkShowcase() {
         </p>
       </header>
 
+      <section className="panel showcase-section phase1-banner">
+        <h3>Phase 1 Shoot — Founder Approved ✅</h3>
+        <p className="showcase-note">
+          Victoria + Priya execute the grail shoot. Full shot list: <code>app/team/PHASE-1-SHOOT-LIST.md</code>.
+          Vault Drop launches 48h after Mantle photo goes live.
+        </p>
+        <ul className="phase1-list">
+          <li><strong>1.</strong> Jackie Robinson · 1948 Leaf PSA 4 · $28,000</li>
+          <li><strong>2.</strong> Ty Cobb · 1909 T206 PSA 3 · $32,000</li>
+          <li><strong>3.</strong> Roberto Clemente · 1955 Topps PSA 8 · $35,000</li>
+          <li><strong>4.</strong> Babe Ruth · 1933 Goudey PSA 7 · $45,000</li>
+          <li><strong>5.</strong> Hank Aaron · 1954 Topps PSA 9 · $89,000</li>
+          <li><strong>6.</strong> Mickey Mantle · 1952 Topps PSA 8 · $125,000 — capstone / shop hero</li>
+        </ul>
+      </section>
+
       {/* Slab visual effects */}
       <section className="panel showcase-section">
         <h3>Slab Photography &amp; Visual Effects — Priya + James</h3>

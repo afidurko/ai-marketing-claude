@@ -1338,6 +1338,25 @@ input, select, textarea {
   max-width: 720px;
 }
 
+.phase1-banner {
+  border-left: 4px solid var(--field-green);
+  background: rgba(45, 80, 22, 0.06);
+}
+
+.phase1-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--leather);
+}
+
+.phase1-list li strong {
+  color: var(--field-green);
+  font-family: 'Oswald', sans-serif;
+}
+
 .showcase-section {
   margin-bottom: 1.5rem;
 }
