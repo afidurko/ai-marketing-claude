@@ -35,6 +35,12 @@ Thumbs.db
 
 # Node
 node_modules/
+dist/
+
+# Heritage Slabs app
+app/backend/heritage_slabs.db
+app/backend/.env
+app/frontend/dist/
 
 # Temp
 *.tmp
